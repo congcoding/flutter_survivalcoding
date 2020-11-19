@@ -15,32 +15,24 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  var _text = 'Hello';
-
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Hello World'),
+        title: Text('제목'),
       ),
-      body: Text(
-        _text,
-        style: TextStyle(fontSize: 40),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            _text = 'World';
-          });
-        },
-        child: Icon(Icons.touch_app),
-      ),
+      body: Container(
+        color: Colors.red,
+        width: 100,
+        height: 100,
+        padding: const EdgeInsets.all(8.0),
+        margin: const EdgeInsets.all(8.0),
+      )
     );
   }
 }
+
+
+
+
