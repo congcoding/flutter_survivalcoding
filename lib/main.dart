@@ -20,16 +20,20 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('SizedBox'),
+        title: Text('Card'),
       ),
-      body: SizedBox(
-        width: 100,
-        height: 100,
-        child: Container(
-          color: Colors.red,
+      body: Center(
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          elevation: 4.0,
+          child: Container(
+            width: 200,
+            height: 200,
+          )
         )
       )
     );
   }
 }
-
