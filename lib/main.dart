@@ -20,15 +20,27 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Align'),
+        title: Text('Expanded'),
       ),
-      body: Align(
-        alignment: Alignment.bottomRight,
-        child: Container(
-          color: Colors.red,
-          width: 100,
-          height: 100,
-        )
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            flex: 2,
+            child: Container(
+              color: Colors.red,
+            ),
+          ),
+          Expanded(
+            child: Container(
+              color: Colors.green,
+            ),
+          ),
+          Expanded(
+            child: Container(
+              color: Colors.blue,
+            ),
+          ),
+        ]
       )
     );
   }
