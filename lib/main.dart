@@ -20,12 +20,18 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('IconButton'),
+        title: Text('Text'),
       ),
       body: Center(
-        child: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () {},
+        child: Text(
+          'Hello World',
+          style: TextStyle(
+            fontSize: 40.0,
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.bold,
+            color: Colors.red,
+            letterSpacing: 4.0,
+          )
         )
       )
     );
