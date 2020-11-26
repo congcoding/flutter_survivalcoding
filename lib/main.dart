@@ -23,10 +23,8 @@ class MyHomePage extends StatelessWidget {
         title: Text('IconButton'),
       ),
       body: Center(
-        child: IconButton(
-          icon: Icon(Icons.add),
-          color: Colors.red,
-          iconSize: 100.0,
+        child: FloatingActionButton(
+          child: Icon(Icons.add),
           onPressed: () {},
         )
       )
