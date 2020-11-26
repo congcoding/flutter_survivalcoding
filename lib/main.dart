@@ -20,14 +20,11 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Progress'),
+        title: Text('CircleAvatar'),
       ),
       body: Center(
-        child: Stack(
-            children: <Widget>[
-              CircularProgressIndicator(),
-              LinearProgressIndicator(),
-            ]
+        child: CircleAvatar(
+          child: Icon(Icons.person),
         )
       )
     );
