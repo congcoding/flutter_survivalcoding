@@ -20,10 +20,14 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Image'),
+        title: Text('Icon'),
       ),
       body: Center(
-        child: Image.network('http://bit.ly/2Pvz4t8')
+        child: Icon(
+          Icons.home,
+          color: Colors.red,
+          size: 60.0,
+        )
       )
     );
   }
