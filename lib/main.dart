@@ -20,13 +20,12 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('RaisedButton'),
+        title: Text('FlatButton'),
       ),
       body: Center(
-        child: RaisedButton(
-          child: Text('RaisedButton'),
-          color: Colors.orange,
-          onPressed: () {}
+        child: FlatButton(
+          child: Text('FloatButton'),
+          onPressed: () {},
         )
       )
     );
