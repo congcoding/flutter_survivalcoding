@@ -20,18 +20,16 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Padding'),
+        title: Text('Align'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(40.0),
+      body: Align(
+        alignment: Alignment.bottomRight,
         child: Container(
           color: Colors.red,
-        ),
-      ),
+          width: 100,
+          height: 100,
+        )
+      )
     );
   }
 }
-
-
-
-
