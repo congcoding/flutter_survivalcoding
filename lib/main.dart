@@ -20,18 +20,13 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Card'),
+        title: Text('RaisedButton'),
       ),
       body: Center(
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          elevation: 4.0,
-          child: Container(
-            width: 200,
-            height: 200,
-          )
+        child: RaisedButton(
+          child: Text('RaisedButton'),
+          color: Colors.orange,
+          onPressed: () {}
         )
       )
     );
