@@ -20,28 +20,16 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Expanded'),
+        title: Text('SizedBox'),
       ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            flex: 2,
-            child: Container(
-              color: Colors.red,
-            ),
-          ),
-          Expanded(
-            child: Container(
-              color: Colors.green,
-            ),
-          ),
-          Expanded(
-            child: Container(
-              color: Colors.blue,
-            ),
-          ),
-        ]
+      body: SizedBox(
+        width: 100,
+        height: 100,
+        child: Container(
+          color: Colors.red,
+        )
       )
     );
   }
 }
+
