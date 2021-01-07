@@ -10,45 +10,51 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.yellow,
       ),
-      home: MyHomePage(),
+      home: HeroPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class HeroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('GestureDetector, InkWell'),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              GestureDetector(
-                onTap: () {
-                  print('GestureDetector 클릭!!');
-                },
-                child: Text('클릭 Me!!'),
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              InkWell(
-                onTap: () {
-                  print('InkWell 클릭!!');
-                },
-                child: Text('클릭 Me!!'),
-              ),
-            ],
-          ),
+      appBar: AppBar(
+        title: Text('Hero'),
+      ),
+      body: Center(
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HeroDetailPage()),
+            );
+          },
+          child: Hero(
+            tag: 'image',
+            child: Image.asset(
+              'assets/sample.jpg',
+              width: 100,
+              height: 100,
+            )
+          )
         )
+      )
+    );
+  }
+}
+
+class HeroDetailPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Hero Detail'),
+      ),
+      body: Hero(
+        tag: 'image',
+        child: Image.asset('assets/sample.jpg'),
+      )
     );
   }
 }
