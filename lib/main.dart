@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -17,37 +15,30 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  var _size = 100.0;
-
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('AnimatedContainer'),
-        ),
-        body: Center(
-          child: GestureDetector(
-            onTap: () {
-              final random = Random();
-              setState(() {
-                _size = random.nextInt(200).toDouble() + 100;
-              });
-            },
-            child: AnimatedContainer(
-              duration: Duration(seconds: 1),
-              width: _size,
-              height: _size,
-              child: Image.asset('assets/sample.jpg'),
-              curve: Curves.fastOutSlowIn,
-            ),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            pinned: true,
+            expandedHeight: 180.0,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text('SilverFillRemaining'),
+              background: Image.asset(
+                'assets/sample.jpg',
+                fit: BoxFit.cover,
+              )
+            )
           ),
-        ),
+          SliverFillRemaining(
+            child: Center(
+              child: Text('center')
+            )
+          ),
+        ],
+      )
     );
   }
 }
