@@ -38,12 +38,13 @@ class FirstPage extends StatelessWidget {
             children: <Widget>[
               RaisedButton(
                 child: Text('다음 페이지로'),
-                onPressed: () {
+                onPressed: () async {
                   final person = Person('홍길동', 20);
-                  Navigator.push(
+                  final result = await Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => SecondPage(person: person)),
                   );
+                  print(result);
                 },
               )
             ]
@@ -75,7 +76,7 @@ class SecondPage extends StatelessWidget {
               RaisedButton(
                 child: Text('이전 페이지로'),
                 onPressed: () {
-                Navigator.pop(context);
+                Navigator.pop(context, 'ok');
                 }
               ),
               Text(person.name + " " + person.age.toString()),
