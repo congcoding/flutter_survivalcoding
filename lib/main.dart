@@ -21,52 +21,41 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  DateTime _selectedTime;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('AlertDialog'),
+          title: Text('DatePicker'),
         ),
-        body: RaisedButton(
-          onPressed: () {
-            _neverStatisfied();
-          },
-          child: Text('Alert Dialog'),
-        )
-    );
-  }
-
-  Future<void> _neverStatisfied() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('제목'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('Alert Dialog입니다'),
-                Text('OK를 눌러 닫습니다.'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('OK'),
+        body: Column(
+          children: <Widget>[
+            RaisedButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                Future<DateTime> selectedDate = showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(2021),
+                  lastDate: DateTime(2030),
+                  builder: (BuildContext context, Widget child) {
+                    return Theme(
+                      data: ThemeData.dark(),
+                      child: child,
+                    );
+                  },
+                );
+                selectedDate.then((dateTime) {
+                  setState(() {
+                    _selectedTime = dateTime;
+                  });
+                });
               },
+              child: Text('Date Picker'),
             ),
-            FlatButton(
-              child: Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
+            Text('$_selectedTime'),
           ],
-        );
-      },
+        ),
     );
   }
 }
