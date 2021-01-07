@@ -44,11 +44,34 @@ class _MyHomePageState extends State<MyHomePage> {
             borderRadius: BorderRadius.circular(16.0),
             color: Colors.orange,
             child: Text('쿠퍼티노 AlertDialog'),
-            onPressed: () {},
+            onPressed: () {
+              _showCupertinoDialog();
+            },
           ),
           CupertinoButton(
             child: Text('쿠퍼티노 Picker'),
             onPressed: () {},
+          )
+        ]
+      )
+    );
+  }
+
+  _showCupertinoDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => CupertinoAlertDialog(
+        title: Text('제목'),
+        content: Text('내용'),
+        actions: <Widget>[
+          CupertinoDialogAction(
+            child: Text('Cancel'),
+          ),
+          CupertinoDialogAction(
+            child: Text('Ok'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
           )
         ]
       )
