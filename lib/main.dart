@@ -21,37 +21,29 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  DateTime _selectedTime;
+  String _selectedTime;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('DatePicker'),
+          title: Text('TimePicker'),
         ),
         body: Column(
           children: <Widget>[
             RaisedButton(
               onPressed: () {
-                Future<DateTime> selectedDate = showDatePicker(
+                Future<TimeOfDay> selectedDate = showTimePicker(
+                  initialTime: TimeOfDay.now(),
                   context: context,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime(2021),
-                  lastDate: DateTime(2030),
-                  builder: (BuildContext context, Widget child) {
-                    return Theme(
-                      data: ThemeData.dark(),
-                      child: child,
-                    );
-                  },
                 );
-                selectedDate.then((dateTime) {
+                selectedDate.then((timeOfDay) {
                   setState(() {
-                    _selectedTime = dateTime;
+                    _selectedTime = '${timeOfDay.hour}:${timeOfDay.minute}';
                   });
                 });
               },
-              child: Text('Date Picker'),
+              child: Text('Time Picker'),
             ),
             Text('$_selectedTime'),
           ],
