@@ -15,28 +15,48 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  var _isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('TextField'),
+          title: Text('Checkbox, Switch'),
         ),
-        body: Column(
-          children: <Widget>[
-            TextField(),
-            TextField(
-                decoration: InputDecoration(
-                  labelText: '여기에 입력하세요',
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Checkbox(
+                  value: _isChecked,
+                  onChanged: (value) {
+                    setState(() {
+                      _isChecked = value;
+                    });
+                  },
                 ),
-            ),
-            TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: '여기에 입력하세요',
-              ),
+                SizedBox(
+                  height: 40,
+                ),
+                Switch(
+                  value: _isChecked,
+                  onChanged: (value) {
+                    setState(() {
+                      _isChecked = value;
+                    });
+                  }
+                )
+              ]
             )
-          ]
+          )
         )
     );
   }
