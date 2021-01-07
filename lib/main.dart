@@ -21,33 +21,34 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String _selectedTime;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('TimePicker'),
+          title: Text('GestureDetector, InkWell'),
         ),
-        body: Column(
-          children: <Widget>[
-            RaisedButton(
-              onPressed: () {
-                Future<TimeOfDay> selectedDate = showTimePicker(
-                  initialTime: TimeOfDay.now(),
-                  context: context,
-                );
-                selectedDate.then((timeOfDay) {
-                  setState(() {
-                    _selectedTime = '${timeOfDay.hour}:${timeOfDay.minute}';
-                  });
-                });
-              },
-              child: Text('Time Picker'),
-            ),
-            Text('$_selectedTime'),
-          ],
-        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              GestureDetector(
+                onTap: () {
+                  print('GestureDetector 클릭!!');
+                },
+                child: Text('클릭 Me!!'),
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              InkWell(
+                onTap: () {
+                  print('InkWell 클릭!!');
+                },
+                child: Text('클릭 Me!!'),
+              ),
+            ],
+          ),
+        )
     );
   }
 }
