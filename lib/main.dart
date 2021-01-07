@@ -50,7 +50,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           CupertinoButton(
             child: Text('쿠퍼티노 Picker'),
-            onPressed: () {},
+            onPressed: () {
+              _showCupertinoPicker();
+            },
           )
         ]
       )
@@ -76,5 +78,25 @@ class _MyHomePageState extends State<MyHomePage> {
         ]
       )
     );
+  }
+
+  _showCupertinoPicker() async {
+     final _items = List.generate(10, (i) => i);
+     var result = _items[0];
+
+     await showCupertinoModalPopup(
+       context: context,
+       builder: (context) => Container(
+         height: 200.0,
+         child: CupertinoPicker(
+           children: _items.map((e) => Text('No. $e')).toList(),
+           itemExtent: 50.0,
+           onSelectedItemChanged: (int value) {
+             result = _items[value];
+           }
+         )
+       )
+     );
+     print(result);
   }
 }
