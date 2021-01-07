@@ -16,6 +16,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  final _items = List.generate(50, (i) => ListTile(title: Text('No. $i')));
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,17 +27,15 @@ class MyHomePage extends StatelessWidget {
             pinned: true,
             expandedHeight: 180.0,
             flexibleSpace: FlexibleSpaceBar(
-              title: Text('SilverFillRemaining'),
+              title: Text('SliverList'),
               background: Image.asset(
                 'assets/sample.jpg',
                 fit: BoxFit.cover,
               )
             )
           ),
-          SliverFillRemaining(
-            child: Center(
-              child: Text('center')
-            )
+          SliverList(
+            delegate: SliverChildListDelegate(_items),
           ),
         ],
       )
