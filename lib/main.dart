@@ -10,10 +10,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.yellow,
       ),
-      home: FirstPage(),
+      home: FirstStatefulPage(),
       routes: {
-        '/first': (context) => FirstPage(),
-        '/second': (context) => SecondPage(),
+        '/first': (context) => FirstStatefulPage(),
+        '/second': (context) => SecondStatefulPage(),
       }
     );
   }
@@ -26,7 +26,12 @@ class Person {
   Person(this.name, this.age);
 }
 
-class FirstPage extends StatelessWidget {
+class FirstStatefulPage extends StatefulWidget {
+  @override
+  _FirstStatefulPageState createState() => _FirstStatefulPageState();
+}
+
+class _FirstStatefulPageState extends State<FirstStatefulPage> {
   @override
   Widget build(BuildContext context) {
     print('FirstPage build()');
@@ -34,56 +39,43 @@ class FirstPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('First'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              RaisedButton(
-                child: Text('다음 페이지로'),
-                onPressed: () async {
-                  final person = Person('홍길동', 20);
-                  final result = await Navigator.pushNamed(context, '/second', arguments: person);
-                  print(result);
-                },
-              )
-            ]
-          )
-        )
+      body: RaisedButton(
+        child: Text('다음 페이지로'),
+        onPressed: () {
+          final person = Person('홍길동', 20);
+              Navigator.push(
+              context,
+            MaterialPageRoute(builder: (context) => SecondStatefulPage(person: person)),
+          );
+        }
       )
     );
   }
 }
 
-class SecondPage extends StatelessWidget {
+class SecondStatefulPage extends StatefulWidget {
+  final Person person;
+  SecondStatefulPage({Key key, @required this.person}) : super(key: key);
+
+  @override
+  _SecondStatefulPageState createState() => _SecondStatefulPageState();
+}
+
+class _SecondStatefulPageState extends State<SecondStatefulPage> {
   @override
   Widget build(BuildContext context) {
     print('SecondPage build()');
-    final Person person = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Second'),
+        title: Text(widget.person.name),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              RaisedButton(
-                child: Text('이전 페이지로'),
-                onPressed: () {
-                  Navigator.pop(context, 'ok');
-                }
-              ),
-              Text(person.name + " " + person.age.toString()),
-            ]
-          )
+      body:
+        RaisedButton(
+          child: Text('이전 페이지로'),
+          onPressed: () {
+            Navigator.pop(context);
+          }
         )
-      )
     );
   }
 }
