@@ -29,6 +29,7 @@ class Person {
 class FirstPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print('FirstPage build()');
     return Scaffold(
       appBar: AppBar(
         title: Text('First'),
@@ -59,6 +60,7 @@ class FirstPage extends StatelessWidget {
 class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print('SecondPage build()');
     final Person person = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
