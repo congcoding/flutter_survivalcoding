@@ -11,6 +11,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.yellow,
       ),
       home: FirstPage(),
+      routes: {
+        '/first': (context) => FirstPage(),
+        '/second': (context) => SecondPage(),
+      }
     );
   }
 }
@@ -40,10 +44,7 @@ class FirstPage extends StatelessWidget {
                 child: Text('다음 페이지로'),
                 onPressed: () async {
                   final person = Person('홍길동', 20);
-                  final result = await Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SecondPage(person: person)),
-                  );
+                  final result = await Navigator.pushNamed(context, '/second', arguments: person);
                   print(result);
                 },
               )
@@ -56,12 +57,9 @@ class FirstPage extends StatelessWidget {
 }
 
 class SecondPage extends StatelessWidget {
-  final Person person;
-
-  SecondPage({@required this.person});
-
   @override
   Widget build(BuildContext context) {
+    final Person person = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text('Second'),
@@ -76,7 +74,7 @@ class SecondPage extends StatelessWidget {
               RaisedButton(
                 child: Text('이전 페이지로'),
                 onPressed: () {
-                Navigator.pop(context, 'ok');
+                  Navigator.pop(context, 'ok');
                 }
               ),
               Text(person.name + " " + person.age.toString()),
