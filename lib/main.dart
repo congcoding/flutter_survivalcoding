@@ -9,6 +9,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.yellow,
+        primaryColor: Colors.yellow,
       ),
       home: MyHomePage(),
     );
@@ -28,6 +29,15 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('복잡한 UI'),
+        centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.add,
+            ),
+            onPressed: () {},
+          )
+        ]
       ),
       body: Center(
         child: Text(
@@ -44,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
         currentIndex: _index,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            title: Text(''),
+            title: Text('홈'),
             icon: Icon(Icons.home),
           ),
           BottomNavigationBarItem(
