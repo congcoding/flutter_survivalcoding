@@ -74,12 +74,124 @@ class _MyHomePageState extends State<MyHomePage> {
 class Page1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        '홈 페이지',
-        style: TextStyle(fontSize: 40),
+    return Column(
+      children: <Widget>[
+        _buildTop(),
+        _buildMiddle(),
+        _buildBottom(),
+      ],
+    );
+  }
+
+  Widget _buildTop() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20, bottom: 20),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  print('클릭');
+                },
+                child: Column(
+                  children: <Widget>[
+                    Icon(
+                      Icons.local_taxi,
+                      size: 40,
+                    ),
+                    Text('택시'),
+                  ],
+                ),
+              ),
+              Column(
+                children: <Widget>[
+                  Icon(
+                    Icons.local_taxi,
+                    size: 40,
+                  ),
+                  Text('블랙'),
+                ],
+              ),
+              Column(
+                children: <Widget>[
+                  Icon(
+                    Icons.local_taxi,
+                    size: 40,
+                  ),
+                  Text('바이크'),
+                ],
+              ),
+              Column(
+                children: <Widget>[
+                  Icon(
+                    Icons.local_taxi,
+                    size: 40,
+                  ),
+                  Text('대리'),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                children: <Widget>[
+                  Icon(
+                    Icons.local_taxi,
+                    size: 40,
+                  ),
+                  Text('택시'),
+                ],
+              ),
+              Column(
+                children: <Widget>[
+                  Icon(
+                    Icons.local_taxi,
+                    size: 40,
+                  ),
+                  Text('블랙'),
+                ],
+              ),
+              Column(
+                children: <Widget>[
+                  Icon(
+                    Icons.local_taxi,
+                    size: 40,
+                  ),
+                  Text('바이크'),
+                ],
+              ),
+              Opacity(
+                opacity: 0.0,
+                child: Column(
+                  children: <Widget>[
+                    Icon(
+                      Icons.local_taxi,
+                      size: 40,
+                    ),
+                    Text('대리'),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
+  }
+
+  Widget _buildMiddle() {
+    return Text('Middle');
+  }
+
+  Widget _buildBottom() {
+    return Text('Bottom');
   }
 }
 
