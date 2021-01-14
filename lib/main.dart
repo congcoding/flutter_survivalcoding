@@ -195,8 +195,10 @@ class Page1 extends StatelessWidget {
 
   Widget _buildMiddle() {
     return CarouselSlider(
-      height: 150,
-      autoPlay: true,
+      options: CarouselOptions(
+        height: 150,
+        autoPlay: true,
+      ),
       items: dummyItems.map((url) {
         return Builder(
           builder: (BuildContext context) {
@@ -234,15 +236,85 @@ class Page1 extends StatelessWidget {
 }
 
 class Page2 extends StatelessWidget {
+  CarouselController buttonCarouselController = CarouselController();
+
   @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        '이용서비스',
-        style: TextStyle(fontSize: 40),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => Column(
+      children: <Widget>[
+        CarouselSlider(
+          items: dummyItems.map((url) {
+            return Builder(
+              builder: (BuildContext context) {
+                return Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.symmetric(horizontal: 5.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.network(
+                      url,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+              },
+            );
+          }).toList(),
+          carouselController: buttonCarouselController,
+          options: CarouselOptions(
+            autoPlay: false,
+            // enlargeCenterPage: true,
+            viewportFraction: 0.9,
+            aspectRatio: 2.0,
+            initialPage: 2,
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            SizedBox(
+              width: 60,
+              child: RaisedButton(
+                onPressed: () => buttonCarouselController.previousPage(
+                  duration: Duration(milliseconds: 300), curve: Curves.linear),
+                child: Text('<-'),
+              )
+            ),
+            SizedBox(
+              width: 60,
+              child: RaisedButton(
+                onPressed: () => buttonCarouselController.animateToPage(
+                  1, duration: Duration(milliseconds: 300), curve: Curves.linear),
+                child: Text('1'),
+              )
+            ),
+            SizedBox(
+                width: 60,
+                child: RaisedButton(
+                  onPressed: () => buttonCarouselController.animateToPage(
+                      2, duration: Duration(milliseconds: 300), curve: Curves.linear),
+                  child: Text('2'),
+                )
+            ),
+            SizedBox(
+                width: 60,
+                child: RaisedButton(
+                  onPressed: () => buttonCarouselController.animateToPage(
+                      3, duration: Duration(milliseconds: 300), curve: Curves.linear),
+                  child: Text('3'),
+                )
+            ),
+            SizedBox(
+                width: 60,
+                child: RaisedButton(
+                  onPressed: () => buttonCarouselController.nextPage(
+                      duration: Duration(milliseconds: 300), curve: Curves.linear),
+                  child: Text('->'),
+                )
+            ),
+          ],
+        )
+      ]
+  );
 }
 
 class Page3 extends StatelessWidget {
