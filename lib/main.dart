@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() => runApp(MyApp());
 
 class Todo {
-  bool isDone = false;
+  bool isDone;
   String title;
 
-  Todo(this.title);
+  Todo(this.title, {this.isDone = false});
 }
 
 class MyApp extends StatelessWidget {
@@ -28,8 +29,6 @@ class TodoListPage extends StatefulWidget {
 }
 
 class _TodoListPageState extends State<TodoListPage> {
-  final _items = <Todo>[];
-
   var _todoController = TextEditingController();
 
   @override
@@ -61,56 +60,64 @@ class _TodoListPageState extends State<TodoListPage> {
                 ),
               ],
             ),
-            Expanded(
-              child: ListView(
-                children: _items.map((todo) => _buildItemWidget(todo)).toList(),
-              )
-            )
-          ]
-        )
-      )
+            StreamBuilder<QuerySnapshot>(
+              stream: Firestore.instance.collection('todo').snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return CircularProgressIndicator();
+                }
+                final documents = snapshot.data.documents;
+                return Expanded(
+                  child: ListView(
+                    children: documents.map((doc) => _buildItemWidget(doc)).toList(),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 
   // 할 일 객체를 ListTile 형태로 변경하는 메서드
-  Widget _buildItemWidget(Todo todo) {
+  Widget _buildItemWidget(DocumentSnapshot doc) {
+    final todo = Todo(doc['title'], isDone: doc['isDone']);
     return ListTile(
-      onTap: () => _toggleTodo(todo),
+      onTap: () => _toggleTodo(doc),
       title: Text(
         todo.title,
         style: todo.isDone
             ? TextStyle(
-          decoration: TextDecoration.lineThrough,
-          fontStyle: FontStyle.italic,
-        )
+                decoration: TextDecoration.lineThrough,
+                fontStyle: FontStyle.italic,
+            )
             : null,
       ),
       trailing: IconButton(
         icon: Icon(Icons.delete_forever),
-        onPressed: () => _deleteTodo(todo),
+        onPressed: () => _deleteTodo(doc),
       ),
     );
   }
 
   // 할 일 추가 메서드
   void _addTodo(Todo todo) {
-    setState(() {
-      _items.add(todo);
-      _todoController.text = '';
-    });
+    Firestore.instance
+      .collection('todo')
+      .add({'title': todo.title, 'isDone': todo.isDone});
+    _todoController.text = '';
   }
 
   // 할 일 삭제 메서드
-  void _deleteTodo(Todo todo) {
-    setState(() {
-      _items.remove(todo);
-    });
+  void _deleteTodo(DocumentSnapshot doc) {
+    Firestore.instance.collection('todo').document(doc.documentID).delete();
   }
 
   // 할 일 완료/미완료 메서드
-  void _toggleTodo(Todo todo) {
-    setState(() {
-      todo.isDone = !todo.isDone;
+  void _toggleTodo(DocumentSnapshot doc) {
+    Firestore.instance.collection('todo').document(doc.documentID).updateData({
+      'isDone': !doc['isDone'],
     });
   }
 }
